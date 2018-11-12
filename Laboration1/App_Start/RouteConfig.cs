@@ -16,8 +16,8 @@ namespace Laboration1
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "LabOne", action = "Index", id = UrlParameter.Optional }
-                //Changed the routing - own controller
+                defaults: new { controller = "LabOne", action = "Create", id = UrlParameter.Optional }
+                //Changed the routing - own controller and view
             );
         }
     }
