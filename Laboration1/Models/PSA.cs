@@ -8,19 +8,19 @@ namespace Laboration1.Models
 {
     public class PSA
     {
-        [Required]
+        [Required(ErrorMessage ="Du måste ju skriva något!")]
         [Display(Name ="De tre första bokstäverna")]
         [StringLength(3)]
         [RegularExpression(@"(ASP)", ErrorMessage ="Du MÅSTE skriva 'ASP'")]
         public string First { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Du måste ju skriva ett tecken!")]
         [Display(Name = "Det där i mitten")]
         [RegularExpression(@"(.)", ErrorMessage = "Du MÅSTE skriva '.'")]
         [StringLength(1)]
         public string Mitten { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Du måste ju skriva något")]
         [Display(Name ="De tre sista bokstäverna")]
         [StringLength(3)]
         [RegularExpression(@"(NET)", ErrorMessage = "Du MÅSTE skriva 'NET'")]

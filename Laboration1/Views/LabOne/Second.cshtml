@@ -5,8 +5,38 @@
 }
 
 <h2>Second</h2>
-@ViewBag.Data
 
+<h4>Tack, du skrev @Model.First@Model.Mitten@Model.Last vilket är helt rätt!!</h4>
+
+<br />
+<br />
+<br />
+
+@Html.BeginForm()
 <div>
-    @Html.ActionLink("Back to List", "Create")
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="Feedback">Vad heter du?:</label>
+        <div class="col-lg-10">
+            @Html.TextBox("Namnet")
+        </div>
+        
+
+        <label class="col-lg-2 control-label" for="Feedback">Har du kul?:</label>
+        <div class="col-lg-10">
+            @Html.DropDownList("yesOrNo", new List<SelectListItem>
+             {
+                new SelectListItem{ Text="Ja", Value = "1" },
+                new SelectListItem{ Text="Nej", Value = "2" },
+             })
+            @ViewBag.Message;
+        </div>
+    </div>
+
+        <input id="Button1" type="button" value="Skicka" />
+
+
 </div>
+<div>
+    @Html.ActionLink("Tillbaka till startsidan", "Create")
+</div>
+

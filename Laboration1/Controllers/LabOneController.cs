@@ -17,79 +17,59 @@ namespace Laboration1.Controllers
 {
     public class LabOneController : Controller
     {
-        // GET: LabOne
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //// GET: LabOne/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
         // GET: LabOne/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            PSA daten = new PSA();
-            return View(daten);
+            // Load Create view
+            return View();
         }
 
         // POST: LabOne/Create
         [HttpPost]
         public ActionResult Create(PSA datat)
         {
-            
-            try
+            // Check if all is ok?
+            if (ModelState.IsValid)
             {
-                //String First = collection["First"];
-                //String Mitten = collection["Mitten"];
-                //String Last = collection["Last"];
-
-                //PSA datat = new PSA();
-                //datat.First = First;
-                //datat.Mitten = Mitten;
-                //datat.Last = Last;
-                //Session["sparat"] = datat;
-
-
-                    // TODO: Add insert logic here
-   // GET: LabOne/Create
-                return RedirectToAction("Second");
+                // Go to new view, pass on info "PARAMETERPASSNING"
+                return View("Second", datat);
             }
-            catch
+            else
             {
+                // There is a validation error
+                // Go back and check
                 return View();
             }
-        }
-        // GET: LabOne/Second
-        [HttpGet]
-        public ActionResult Second(PSA datat)
-        {
-            //PSA data2 = new PSA();
-            //data2 = datat;
-            //String Forsta = data2.First;
-            //String Middle = data2.Mitten;
-            //String Sista = data2.Last;
 
-            //ViewBag.Data = "Du skrev " + Forsta + Middle + Sista + "!";
-            return View();
         }
-        //////////[HttpPost]
-        ////////////public ActionResult Second(PSA data3)
-        ////////////{
-        ////////////    return RedirectToAction("Third");
-        ////////////}
+        [HttpPost]
+        public ActionResult Second(FormCollection collection)
+        {
+            // Check if all is good, 
+            int str = Convert.ToInt16(collection["yesOrNo"]);
+            // Save to a session-variable
+            // Go to new view if user choose JA
+            if (str == 1)
+            {
+                Session["ettNamn"] = collection["Namnet"].ToString();
+                Session["Bra"] = str;
+                return View("Third");
+            }
+            // Let user select JA, with a message
+            else
+            {
+
+                ViewBag.Message = "Kom igen nu, välj JA";
+                return View();
+                        
+            }
+        }
         public ActionResult Third()
         {
-            PSA data2 = new PSA();
-            data2 = (PSA)Session["sparat"];
-            String Forsta = data2.First;
-            String Middle = data2.Mitten;
-            String Sista = data2.Last;
+            int str = Convert.ToInt16(Session["x"]);
 
-            ViewBag.Data = "Du skrev " + Forsta + Middle + Sista + "!";
+            ViewBag.Value = "Va kul att du tyckte det " + Session["ettNamn"];
             return View();
         }
     }
