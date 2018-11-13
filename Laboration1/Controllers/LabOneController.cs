@@ -43,33 +43,24 @@ namespace Laboration1.Controllers
             }
 
         }
-        [HttpPost]
-        public ActionResult Second(FormCollection collection)
-        {
-            // Check if all is good, 
-            int str = Convert.ToInt16(collection["yesOrNo"]);
-            // Save to a session-variable
-            // Go to new view if user choose JA
-            if (str == 1)
-            {
-                Session["ettNamn"] = collection["Namnet"].ToString();
-                Session["Bra"] = str;
-                return View("Third");
-            }
-            // Let user select JA, with a message
-            else
-            {
 
-                ViewBag.Message = "Kom igen nu, välj JA";
-                return View();
-                        
-            }
+        [HttpGet]
+        public ActionResult Second()
+        {
+            return View();
+        }
+
+        // POST: LabOne/Second
+        [HttpPost]
+        public ActionResult Second(FormCollection samling)
+        {
+            return RedirectToAction("Third");
         }
         public ActionResult Third()
         {
-            int str = Convert.ToInt16(Session["x"]);
+            //int str = Convert.ToInt16(Session["x"]);
 
-            ViewBag.Value = "Va kul att du tyckte det " + Session["ettNamn"];
+            ViewBag.Value = "Va kul att du tyckte det " + Session["Namn"];
             return View();
         }
     }
